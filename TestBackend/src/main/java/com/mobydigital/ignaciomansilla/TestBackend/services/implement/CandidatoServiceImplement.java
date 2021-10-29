@@ -30,12 +30,6 @@ public class CandidatoServiceImplement implements CandidatoService {
     @Autowired
     CandidatoPorTecnologiaService candidatoPorTecnologiaService;
 
-    /*@Override
-    public Candidato crearCandidato(Candidato candidato){
-        log.info("se agrego el candidato : " + candidato.getNombre());
-        return candidatoRepository.save(candidato);
-    }*/
-
     @Override
     public void guardar(CrearCandidatoDto crearCandidatoDto) {
 
@@ -55,7 +49,7 @@ public class CandidatoServiceImplement implements CandidatoService {
                 .build();
 
         candidatoRepository.save(candidato);
-        log.info("se agrego el candidato : " + candidato.getNombre());
+        log.info("Se agrego el candidato: " + candidato.getNombre());
     }
 
     @Override

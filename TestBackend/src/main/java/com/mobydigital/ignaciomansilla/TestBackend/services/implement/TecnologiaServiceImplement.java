@@ -20,8 +20,8 @@ public class TecnologiaServiceImplement implements TecnologiaService {
 
     @Override
     public void guardar(Tecnologia tecnologia) {
-
         tecnologiaRepository.save(tecnologia);
+        log.info("Se agrego la tecnologia:" + tecnologia.getNombreTecnologia());
     }
 
     @Override
@@ -61,6 +61,8 @@ public class TecnologiaServiceImplement implements TecnologiaService {
 
         if(tecnologiaRepository.existsById(tecnologiaDto.getId())){
             tecnologiaRepository.save(tecnologia);
+        }else{
+            log.warning("No Existe tecnologia con ID: " + tecnologiaDto.getId());
         }
     }
 
