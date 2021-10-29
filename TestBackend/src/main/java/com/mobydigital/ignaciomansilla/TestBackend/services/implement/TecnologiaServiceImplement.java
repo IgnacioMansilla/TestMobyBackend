@@ -8,6 +8,7 @@ import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Log
@@ -36,8 +37,17 @@ public class TecnologiaServiceImplement implements TecnologiaService {
     }
 
     @Override
-    public List<Tecnologia> traerTodas() {
-        return tecnologiaRepository.findAll();
+    public List<TecnologiaDto> traerTodas() {
+        List<Tecnologia> tecnologias = tecnologiaRepository.findAll();
+        List<TecnologiaDto> tecnologiaDtos = new ArrayList<>();
+        for (Tecnologia tec : tecnologias){
+            tecnologiaDtos.add(TecnologiaDto.builder()
+                    .id(tec.getIdTecnologia())
+                    .nombre(tec.getNombreTecnologia())
+                    .version(tec.getVersion())
+                    .build());
+        }
+        return  tecnologiaDtos;
     }
 
     @Override

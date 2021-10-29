@@ -16,8 +16,8 @@ import lombok.ToString;
 public class CandidatoPorTecnologiaDto {
 
     private Integer idCandidatoPorTecnologia;
-    private Candidato idCandidato;
-    private Tecnologia idTecnologia;
+    private CandidatoDto CandidatoDto;
+    private TecnologiaDto TecnologiaDto;
     private Integer aniosExperiencia;
 }
 

@@ -41,7 +41,7 @@ public class TecnologiaController {
 
     //LISTAR TECNOLOGIAS
     @GetMapping(value = "/traertodas")
-    public ResponseEntity<List<Tecnologia>> traerTodas() {
+    public ResponseEntity<List<TecnologiaDto>> traerTodas() {
         return new ResponseEntity<>(tecnologiaService.traerTodas(), HttpStatus.OK);
     }
 }

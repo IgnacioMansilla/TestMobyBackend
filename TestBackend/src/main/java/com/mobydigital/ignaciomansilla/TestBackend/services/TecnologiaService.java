@@ -14,7 +14,7 @@ public interface TecnologiaService {
 
     void eliminarTecnologia(Integer idTecnologia);
 
-    List<Tecnologia> traerTodas();
+    List<TecnologiaDto> traerTodas();
 
 
     void update(TecnologiaDto tecnologiaDto);

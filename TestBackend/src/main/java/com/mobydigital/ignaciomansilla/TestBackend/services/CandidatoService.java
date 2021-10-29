@@ -13,7 +13,7 @@ public interface CandidatoService {
 
     void eliminarCandidato(Integer id);
 
-    List<Candidato> traerTodos();
+    List<CandidatoDto> traerTodos();
 
     void update(CandidatoDto candidatoDto);
 }

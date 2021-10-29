@@ -1,8 +1,11 @@
 package com.mobydigital.ignaciomansilla.TestBackend.controller;
 
+import com.mobydigital.ignaciomansilla.TestBackend.exception.CandidatoNotFoundException;
 import com.mobydigital.ignaciomansilla.TestBackend.models.entities.Candidato;
+import com.mobydigital.ignaciomansilla.TestBackend.models.entities.CandidatoPorTecnologia;
 import com.mobydigital.ignaciomansilla.TestBackend.models.views.CandidatoDto;
 import com.mobydigital.ignaciomansilla.TestBackend.models.views.CrearCandidatoDto;
+import com.mobydigital.ignaciomansilla.TestBackend.services.CandidatoPorTecnologiaService;
 import com.mobydigital.ignaciomansilla.TestBackend.services.CandidatoService;
 import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +24,9 @@ public class CandidatoController {
     @Autowired
     private CandidatoService candidatoService;
 
+    @Autowired
+    CandidatoPorTecnologiaService candidatoPorTecnologiaService;
+
     //CREAR CANDIDATO
     @PostMapping(value = "/crear")
     public ResponseEntity<String> crearCandidato(@RequestBody CrearCandidatoDto candidatoDto) {
@@ -31,8 +37,12 @@ public class CandidatoController {
     //ACTUALIZAR CANDIDATO
     @PutMapping(value = "/actualizar")
     public ResponseEntity<String> actualizarCandidato(@RequestBody CandidatoDto candidatoDto){
-        candidatoService.update(candidatoDto);
-        return new ResponseEntity<>("se actualizo el candidato",HttpStatus.OK);
+        try {
+            candidatoService.update(candidatoDto);
+            return new ResponseEntity<>("se actualizo el candidato", HttpStatus.OK);
+        }catch (CandidatoNotFoundException candidatoNotFoundException){
+            return new ResponseEntity<>(candidatoNotFoundException.getMessage(), HttpStatus.NOT_FOUND);
+        }
     }
 
     //ELIMINAR CANDIDATO
@@ -42,9 +52,15 @@ public class CandidatoController {
         return new ResponseEntity<>("candidato eliminado" ,HttpStatus.OK);
     }
 
-    //LISTAR CANDIDATOS
+    //LISTAR CANDIDATOS DTO CON LISTA DE CANDIDATOS POR TECNOLOGIA
     @GetMapping(value = "/traertodos")
-    public ResponseEntity<List<Candidato>> traerTodos() {
+    public ResponseEntity<List<CandidatoDto>> traerTodos() {
         return new ResponseEntity<>(candidatoService.traerTodos(), HttpStatus.OK);
+    }
+
+    //BUSCAR CANDIDATOS POR X TECNOLOGIA CON SUS AÑOS DE EXPERIENCIA
+    @GetMapping(value = "/candidatosxtecnologiabynombre/{nombre}")
+        public ResponseEntity<List<CandidatoPorTecnologia>> candidatosXTecnologiaByNombre(@PathVariable String nombre) {
+            return new ResponseEntity<>(candidatoPorTecnologiaService.findCandidatoPorTecnologiaByNombreTecnologia(nombre), HttpStatus.OK);
     }
 }

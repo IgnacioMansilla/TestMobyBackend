@@ -1,7 +1,6 @@
 package com.mobydigital.ignaciomansilla.TestBackend.models.views;
 
 import com.mobydigital.ignaciomansilla.TestBackend.models.entities.CandidatoPorTecnologia;
-import com.mobydigital.ignaciomansilla.TestBackend.models.entities.Tecnologia;
 import com.mobydigital.ignaciomansilla.TestBackend.models.enums.TipoDocumento;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -25,7 +24,7 @@ public class CandidatoDto {
     private TipoDocumento tipoDocumento;
     private String dni;
     private Date fechaNacimiento;
-    private CandidatoPorTecnologia candidatoPorTecnologia;
 
-    private List<Tecnologia> tecnologias;
+    private List<CandidatoPorTecnologia> candidatoPorTecnologia;
+
 }
